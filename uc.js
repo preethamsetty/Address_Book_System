@@ -1,4 +1,4 @@
-// UC5: Find a person by name and delete it
+// UC6: Ability to find the number of contacts using reduce
 
 class AddressBook {
     constructor() {
@@ -13,18 +13,14 @@ class AddressBook {
         return this.contacts;
     }
 
-    deleteContact(name) {
-        const index = this.contacts.findIndex(c => c.firstName === name || c.lastName === name);
-        if (index !== -1) {
-            this.contacts.splice(index, 1);
-        } else {
-            throw new Error("Contact not found.");
-        }
+    // Get number of contacts using reduce
+    getContactCount() {
+        return this.contacts.reduce(count => count + 1, 0);
     }
 }
 
 // Example
 let addressBook = new AddressBook();
 addressBook.addContact(new Contact("John", "Doe", "123 Street", "City", "State", "123456", "1234567890", "john@example.com"));
-addressBook.deleteContact("John");
-console.log(addressBook.getAllContacts());  // John will be removed
+addressBook.addContact(new Contact("Jane", "Smith", "456 Avenue", "Town", "Province", "654321", "0987654321", "jane@example.com"));
+console.log("Number of contacts: " + addressBook.getContactCount());
