@@ -1,4 +1,4 @@
-// UC4: Find existing contact person using their name and edit it
+// UC5: Find a person by name and delete it
 
 class AddressBook {
     constructor() {
@@ -13,11 +13,10 @@ class AddressBook {
         return this.contacts;
     }
 
-    // Find contact by name and edit
-    editContact(name, newDetails) {
-        let contact = this.contacts.find(c => c.firstName === name || c.lastName === name);
-        if (contact) {
-            Object.assign(contact, newDetails);
+    deleteContact(name) {
+        const index = this.contacts.findIndex(c => c.firstName === name || c.lastName === name);
+        if (index !== -1) {
+            this.contacts.splice(index, 1);
         } else {
             throw new Error("Contact not found.");
         }
@@ -27,5 +26,5 @@ class AddressBook {
 // Example
 let addressBook = new AddressBook();
 addressBook.addContact(new Contact("John", "Doe", "123 Street", "City", "State", "123456", "1234567890", "john@example.com"));
-addressBook.editContact("John", { city: "NewCity", phone: "9999999999" });
-console.log(addressBook.getAllContacts());
+addressBook.deleteContact("John");
+console.log(addressBook.getAllContacts());  // John will be removed
