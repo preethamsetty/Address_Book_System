@@ -1,4 +1,4 @@
-// UC7: Ensure no duplicate entries based on name
+// UC8: Search for a person in a particular city or state
 
 class AddressBook {
     constructor() {
@@ -6,23 +6,22 @@ class AddressBook {
     }
 
     addContact(contact) {
-        const isDuplicate = this.contacts.some(c => c.firstName === contact.firstName && c.lastName === contact.lastName);
-        if (isDuplicate) {
-            throw new Error("Duplicate contact detected.");
-        }
         this.contacts.push(contact);
     }
 
-    getAllContacts() {
-        return this.contacts;
+    searchByCity(city) {
+        return this.contacts.filter(contact => contact.city === city);
+    }
+
+    searchByState(state) {
+        return this.contacts.filter(contact => contact.state === state);
     }
 }
 
 // Example
-try {
-    let addressBook = new AddressBook();
-    addressBook.addContact(new Contact("John", "Doe", "123 Street", "City", "State", "123456", "1234567890", "john@example.com"));
-    addressBook.addContact(new Contact("John", "Doe", "456 Avenue", "City", "State", "654321", "0987654321", "john2@example.com"));  // Duplicate entry
-} catch (error) {
-    console.error(error.message);  // Should print "Duplicate contact detected."
-}
+let addressBook = new AddressBook();
+addressBook.addContact(new Contact("John", "Doe", "123 Street", "CityA", "StateA", "123456", "1234567890", "john@example.com"));
+addressBook.addContact(new Contact("Jane", "Smith", "456 Avenue", "CityB", "StateA", "654321", "0987654321", "jane@example.com"));
+
+console.log("Contacts in StateA: ", addressBook.searchByState("StateA"));
+console.log("Contacts in CityA: ", addressBook.searchByCity("CityA"));
