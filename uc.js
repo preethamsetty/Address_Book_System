@@ -1,4 +1,4 @@
-// UC3: Ability to create multiple Address Books and add contacts
+// UC4: Find existing contact person using their name and edit it
 
 class AddressBook {
     constructor() {
@@ -12,11 +12,20 @@ class AddressBook {
     getAllContacts() {
         return this.contacts;
     }
+
+    // Find contact by name and edit
+    editContact(name, newDetails) {
+        let contact = this.contacts.find(c => c.firstName === name || c.lastName === name);
+        if (contact) {
+            Object.assign(contact, newDetails);
+        } else {
+            throw new Error("Contact not found.");
+        }
+    }
 }
 
-// Adding multiple contacts
-let addressBook1 = new AddressBook();
-addressBook1.addContact(new Contact("John", "Doe", "123 Street", "City", "State", "123456", "1234567890", "john@example.com"));
-addressBook1.addContact(new Contact("Jane", "Smith", "456 Avenue", "Town", "Province", "654321", "0987654321", "jane@example.com"));
-
-console.log(addressBook1.getAllContacts());
+// Example
+let addressBook = new AddressBook();
+addressBook.addContact(new Contact("John", "Doe", "123 Street", "City", "State", "123456", "1234567890", "john@example.com"));
+addressBook.editContact("John", { city: "NewCity", phone: "9999999999" });
+console.log(addressBook.getAllContacts());
