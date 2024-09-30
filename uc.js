@@ -1,4 +1,4 @@
-// UC10: Get number of contact persons by city or state
+// UC11: Sort the entries alphabetically by person’s name
 
 class AddressBook {
     constructor() {
@@ -9,15 +9,15 @@ class AddressBook {
         this.contacts.push(contact);
     }
 
-    getCountByCity(city) {
-        return this.contacts.filter(contact => contact.city === city).length;
-    }
-
-    getCountByState(state) {
-        return this.contacts.filter(contact => contact.state === state).length;
+    sortByName() {
+        this.contacts.sort((a, b) => a.firstName.localeCompare(b.firstName));
     }
 }
 
 // Example
 let addressBook = new AddressBook();
-addressBook
+addressBook.addContact(new Contact("John", "Doe", "123 Street", "CityA", "StateA", "123456", "1234567890", "john@example.com"));
+addressBook.addContact(new Contact("Jane", "Smith", "456 Avenue", "CityB", "StateA", "654321", "0987654321", "jane@example.com"));
+
+addressBook.sortByName();
+console.log(addressBook.getAllContacts());
